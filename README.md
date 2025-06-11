@@ -4,5 +4,5 @@ Hierfür werden Daten aus dem [Zielfahrplan Deutschlandtakt] (https://assets.ctf
 Bundesministeriums für Verkehr, sowie des [SPNV Konzept 2040+] (https://www.lnvg.de/fileadmin/media/lnvg/SPNV_2019/SPNV_Konzept_2030/LNVG_SPNV-KONZEPT_2030__2040.pdf) 
 der Landesnahverkehrsgesellschaft Niedersachsen (LNVG) verwendet, welche als Excel-Dateien vorliegen.
 Die Methodik zur Auswertung basiert dabei auf
-Bunge, Stephan, 2011. Analyse und Bewertung der regionalen Erschließungsqualität im Scheinenpersonenfernverkehr. Diss. TU Berlin.
+Bunge, Stephan, 2011. Analyse und Bewertung der regionalen Erschließungsqualität im Schienenpersonenfernverkehr. Diss. TU Berlin.
 
