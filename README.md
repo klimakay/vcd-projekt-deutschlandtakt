@@ -5,4 +5,7 @@ Bundesministeriums für Verkehr, sowie des [SPNV Konzept 2040+](https://www.lnvg
 der Landesnahverkehrsgesellschaft Niedersachsen (LNVG) verwendet, welche als Excel-Dateien vorliegen.
 Die Methodik zur Auswertung basiert dabei auf:
 Bunge, Stephan, 2011. Analyse und Bewertung der regionalen Erschließungsqualität im Schienenpersonenfernverkehr. Diss. TU Berlin.
+Das von Bunge verwendete Modell wurde dabei adaptiert und auf den Schienenpersonennahverkehr angewendet.
+Am Ende steht jeweils eine Zahl, welche als Indikatorgröße die Erreichbarkeit eines Ortes im jeweiligen Fahrplan quantifizierbar macht.
+Die Ergebnisse werden am Ende wieder als Excel-Datei für den jeweiligen Fahrplan ausgegeben.
 
