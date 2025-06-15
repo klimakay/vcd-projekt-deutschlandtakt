@@ -92,7 +92,7 @@ def calculation_grundlegend(schedule: dict[str, pd.DataFrame], place: str) -> pd
 
     def takt(taktfrequenz: pd.DataFrame) -> pd.DataFrame:
         """
-        Gives back the number of trains per hour (taktfrquenz)
+        Gives back the number of trains per hour (taktfrequenz)
         :param taktfrequenz:
         :return: taktfrequenz (number of trains/hour)
         """
