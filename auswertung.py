@@ -90,6 +90,14 @@ def calculation_grundlegend(schedule: dict[str, pd.DataFrame], place: str) -> pd
 
         return round(strecke_bahn / strecke_auto, 2)
 
+    def takt(taktfrequenz: pd.DataFrame) -> pd.DataFrame:
+        """
+        Gives back the number of trains per hour (taktfrquenz)
+        :param taktfrequenz:
+        :return: taktfrequenz (number of trains/hour)
+        """
+        return round(taktfrequenz,2)
+
     data = schedule[place]
     cols = data.columns
 
@@ -105,6 +113,7 @@ def calculation_grundlegend(schedule: dict[str, pd.DataFrame], place: str) -> pd
     ua = umsteigezeit_ratio(zeit_bahn=t_bahn)
     bg = befoerderungsgeschwindigkeit(strecke_bahn=s_bahn,zeit_bahn=t_bahn)
     ks = komfort(strecke_bahn=s_bahn, strecke_auto=s_auto)
+    zv = takt(taktfrequenz)
 
     basic_params = pd.DataFrame({"Ziel": destination,
                                  "Reisezeit Verhältnis": ra,
@@ -112,7 +121,7 @@ def calculation_grundlegend(schedule: dict[str, pd.DataFrame], place: str) -> pd
                                  "Umsteigezeit Verhältnis": ua,
                                  "Beförderungsgeschwindigkeit": bg,
                                  "Komfort": ks,
-                                 "Taktfrequenz": taktfrequenz})
+                                 "Taktfrequenz": zv})
 
     return basic_params
 
