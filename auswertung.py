@@ -22,8 +22,8 @@ def read_all_data(filename: str) -> tuple[dict[str, pd.DataFrame], list[int | st
 
 def calculation_grundlegend(schedule: dict[str, pd.DataFrame], place: str) -> pd.DataFrame:
     """
-    Calulates all basic parameters for evaluation: Reisezeit (ra), Umsteigezwang (uv), Umsteigezeit (ua),
-    Beförderungsgeschwindigkeit (bg) und Komfort (as).
+    Calulates all basic parameters for evaluation: Reisezeit (ra),
+    Beförderungsgeschwindigkeit (bg), Komfort (as) and Taktfrequenz (zv).
 
     :param schedule: The entire schedule Excel sheet.
     :param place: Indicates the departure station.
@@ -41,28 +41,6 @@ def calculation_grundlegend(schedule: dict[str, pd.DataFrame], place: str) -> pd
 
         return round(zeit_auto/zeit_bahn, 2)
 
-    def umsteigezwang(strecke_bahn: pd.DataFrame, anzahl_umsteigevorgang=0) -> pd.DataFrame:
-        """
-        Calculates the ratio of transits along distance traveled by train.
-
-        :param strecke_bahn: Distance traveled by train in km.
-        :param anzahl_umsteigevorgang: Number of transits.
-        :return: Umsteigezwang (%/km)
-        """
-
-        return round(anzahl_umsteigevorgang * 100 / strecke_bahn, 2)
-
-    def umsteigezeit_ratio(zeit_bahn: pd.DataFrame, umsteigezeit=0) -> pd.DataFrame:
-        """
-        Calculates the ratio of zeit between transits and the actual travel time.
-
-        :param zeit_bahn: Time traveled by train in min.
-        :param umsteigezeit: Time for transit in minute. Note that it is 0 by default, for cases when no transits are
-        necessary.
-        :return: Umsteigezeit (min).
-        """
-
-        return round(umsteigezeit / zeit_bahn * 100, 2)
 
     def befoerderungsgeschwindigkeit(strecke_bahn: pd.DataFrame, zeit_bahn: pd.DataFrame,
                                      umsteigezeit=0) -> pd.DataFrame:
@@ -109,16 +87,12 @@ def calculation_grundlegend(schedule: dict[str, pd.DataFrame], place: str) -> pd
     taktfrequenz = data[cols[5]]
 
     ra = reisezeit(zeit_bahn=t_bahn,zeit_auto=t_auto)
-    uv = umsteigezwang(strecke_bahn=s_bahn)
-    ua = umsteigezeit_ratio(zeit_bahn=t_bahn)
     bg = befoerderungsgeschwindigkeit(strecke_bahn=s_bahn,zeit_bahn=t_bahn)
     ks = komfort(strecke_bahn=s_bahn, strecke_auto=s_auto)
     zv = takt(taktfrequenz)
 
     basic_params = pd.DataFrame({"Ziel": destination,
                                  "Reisezeit Verhältnis": ra,
-                                 "Umsteigezwang": uv,
-                                 "Umsteigezeit Verhältnis": ua,
                                  "Beförderungsgeschwindigkeit": bg,
                                  "Komfort": ks,
                                  "Taktfrequenz": zv})
