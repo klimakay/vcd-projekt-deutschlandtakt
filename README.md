@@ -9,6 +9,6 @@ Die Methodik zur Auswertung basiert dabei auf dem Erreichbarkeitsmodell von Step
 Das von Bunge verwendete Modell wurde dabei adaptiert und auf den Schienenpersonennahverkehr angewendet.
 Das Modell gibt als Auswertung der Input Dateien für jeden untersuchten Ort jeweils eine Zahl aus, welche als Indikatorgröße die Erreichbarkeit eines Ortes im jeweiligen Fahrplan quantifizierbar macht.
 Die Ergebnisse werden am Ende wieder als Excel-Datei für den jeweiligen Fahrplan ausgegeben.  
-Konkrete Ergebnisse, sowie die gesammelte Methodik des Modells werden später vom [Verkehrsclub Deutschland (VCD) Landesverband Niedersachsen](https://niedersachsen.vcd.org/) als Publikation veröffentlicht
+Konkrete Ergebnisse, sowie die gesammelte Methodik des Modells werden später vom [Verkehrsclub Deutschland (VCD) Landesverband Niedersachsen](https://niedersachsen.vcd.org/) als Publikation veröffentlicht.
 
 
