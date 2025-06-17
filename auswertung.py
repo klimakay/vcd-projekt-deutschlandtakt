@@ -98,10 +98,13 @@ def calculation_grundlegend(schedule: dict[str, pd.DataFrame], place: str) -> pd
                                  "Taktfrequenz": zv})
 
     return basic_params
-"""
-First Evaluation only for Jahresfahrplan 2025, to check if the code works correct
-"""
-evaluation, locations = read_all_data("Auswertung Fahrplan 2025.xlsx")
 
-for location in locations:
-    print(calculation_grundlegend(evaluation,location))
+#Testcase
+if __name__ == '__main__':
+    """
+    First Evaluation only for Jahresfahrplan 2025, to check if the code works correct
+    """
+    evaluation, locations = read_all_data("Auswertung Fahrplan 2025.xlsx")
+
+    for location in locations:
+        print(calculation_grundlegend(evaluation, location))
