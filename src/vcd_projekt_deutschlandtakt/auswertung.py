@@ -12,7 +12,7 @@ def read_all_data(filename: str) -> tuple[dict[str, pd.DataFrame], list[int | st
     """
 
     if filename.endswith(".xlsx"):
-        path = "data/"
+        path = "../../../data/"
         data = pd.read_excel(path + filename, sheet_name=None)
         sheet_names = pd.ExcelFile(path + filename).sheet_names
         return data, sheet_names
