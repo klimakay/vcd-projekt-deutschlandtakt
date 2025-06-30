@@ -17,5 +17,5 @@ git clone https://github.com/klimakay/vcd-projekt-deutschlandtakt.git
 cd vcd_projekt_deutschlandtakt
 python3 -m venv venv
 source venv/bin/activate   # On Windows: venv\Scripts\activate
-pip install -r requirements.txt   # requirements.txt contains: pygame
+pip install -r requirements.txt   # requirements.txt contains: pandas
 ```
