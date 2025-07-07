@@ -9,6 +9,7 @@
 from pathlib import Path
 
 import pandas as pd
+from pandas import DataFrame
 
 def read_all_data(filename: str) -> tuple[dict[str, pd.DataFrame], list[int | str]]:
     """
