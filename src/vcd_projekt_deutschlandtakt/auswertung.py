@@ -6,6 +6,8 @@
     Parameters concerning transits are ignored, as in this case we evaluate direct transits between two destinations.
 """
 
+from pathlib import Path
+
 import pandas as pd
 
 def read_all_data(filename: str) -> tuple[dict[str, pd.DataFrame], list[int | str]]:
