@@ -28,8 +28,10 @@ def read_all_data(filename: str) -> tuple[dict[str, pd.DataFrame], list[int | st
         sheet_names = pd.ExcelFile(path + filename).sheet_names
         return data, sheet_names
 
-    else:
-        raise TypeError("The input must be a .xlsx file")
+    if file_path.suffix != ".xlsx":
+        raise ValueError("The input must be a .xlsx file")
+    return None
+
 
 def calculation_grundlegend(schedule: dict[str, pd.DataFrame], place: str) -> pd.DataFrame:
     """
