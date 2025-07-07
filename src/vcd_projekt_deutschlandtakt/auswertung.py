@@ -11,7 +11,8 @@ from pathlib import Path
 import pandas as pd
 from pandas import DataFrame
 
-def read_all_data(filename: str) -> tuple[dict[str, pd.DataFrame], list[int | str]]:
+
+def read_all_data(file_path: Path) -> dict[str, DataFrame] | None:
     """
     Reads the input of a .xlsx file containing the evaluation of each connection. Outputs the entire .xlsx file,
     as well as the name of each sheet, which indicates the departure station.
