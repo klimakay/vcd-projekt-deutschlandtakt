@@ -31,7 +31,7 @@ def read_all_data(file_path: Path) -> dict[str, DataFrame] | None:
         return data
 
 
-def calculation_grundlegend(schedule: dict[str, pd.DataFrame], place: str) -> pd.DataFrame:
+def calculation_grundlegend(schedule: dict[str, pd.Series], place: str) -> pd.DataFrame:
     """
     Calulates all basic parameters for evaluation: Reisezeit (ra),
     Beförderungsgeschwindigkeit (bg), Komfort (as) and Taktfrequenz (zv).
@@ -41,7 +41,7 @@ def calculation_grundlegend(schedule: dict[str, pd.DataFrame], place: str) -> pd
     :return: basic_params: a pd.DataFrame including all basic parameters to be calculated.
     """
 
-    def reisezeit(zeit_bahn: pd.DataFrame, zeit_auto: pd.DataFrame) -> pd.DataFrame:
+    def reisezeit(zeit_bahn: pd.Series, zeit_auto: pd.Series) -> pd.Series:
         """
         Calculates the ratio between travel time by train and by car. Output is the ratio in percent.
 
@@ -53,8 +53,8 @@ def calculation_grundlegend(schedule: dict[str, pd.DataFrame], place: str) -> pd
         return round(zeit_auto/zeit_bahn, 2)
 
 
-    def befoerderungsgeschwindigkeit(strecke_bahn: pd.DataFrame, zeit_bahn: pd.DataFrame,
-                                     umsteigezeit=0) -> pd.DataFrame:
+    def befoerderungsgeschwindigkeit(strecke_bahn: pd.Series, zeit_bahn: pd.Series,
+                                     umsteigezeit=0) -> pd.Series:
         """
         Calculate the pure travel speed with the distance traveled and the pure travel time with the train.
 
@@ -67,7 +67,7 @@ def calculation_grundlegend(schedule: dict[str, pd.DataFrame], place: str) -> pd
 
         return round(strecke_bahn / (zeit_bahn - umsteigezeit), 2)
 
-    def komfort(strecke_bahn: pd.DataFrame, strecke_auto: pd.DataFrame) -> pd.DataFrame:
+    def komfort(strecke_bahn: pd.Series, strecke_auto: pd.Series) -> pd.Series:
         """
         Calculates the comfort index by dividing the distance traveled by train in km with the distance traveled
         by car in km.
@@ -79,7 +79,7 @@ def calculation_grundlegend(schedule: dict[str, pd.DataFrame], place: str) -> pd
 
         return round(strecke_bahn / strecke_auto, 2)
 
-    def takt(frequenz: pd.DataFrame) -> pd.DataFrame:
+    def takt(frequenz: pd.Series) -> pd.Series:
         """
         Gives back the number of trains per hour (frequenz)
         :param frequenz: number of trains/hour
