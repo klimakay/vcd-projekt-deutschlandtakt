@@ -116,7 +116,8 @@ if __name__ == '__main__':
     """
     First Evaluation only for Jahresfahrplan 2025, to check if the code works correct
     """
-    evaluation, locations = read_all_data("Auswertung Fahrplan 2025.xlsx")
+    PATH = Path("Auswertung_Fahrplan_2025.xlsx")
+    evaluation, locations = read_all_data(PATH)
 
     for location in locations:
         print(calculation_grundlegend(evaluation, location))
