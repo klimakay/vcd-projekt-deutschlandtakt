@@ -23,13 +23,12 @@ def read_all_data(file_path: Path) -> dict[str, DataFrame] | None:
     :raise: ValueError if file_path is not a .xlsx file.
     """
 
-    if file_path.suffix == ".xlsx":
-        data = pd.read_excel(file_path, sheet_name=None)
-        return data
-
     if file_path.suffix != ".xlsx":
         raise ValueError("The input must be a .xlsx file")
-    return None
+
+    else:
+        data = pd.read_excel(file_path, sheet_name=None)
+        return data
 
 
 def calculation_grundlegend(schedule: dict[str, pd.DataFrame], place: str) -> pd.DataFrame:
