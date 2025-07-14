@@ -80,13 +80,13 @@ def calculation_grundlegend(schedule: dict[str, pd.DataFrame], place: str) -> pd
 
         return round(strecke_bahn / strecke_auto, 2)
 
-    def takt(taktfrequenz: pd.DataFrame) -> pd.DataFrame:
+    def takt(frequenz: pd.DataFrame) -> pd.DataFrame:
         """
-        Gives back the number of trains per hour (taktfrequenz)
-        :param taktfrequenz: number of trains/hour
-        :return: taktfrequenz (number of trains/hour)
+        Gives back the number of trains per hour (frequenz)
+        :param frequenz: number of trains/hour
+        :return: frequenz (number of trains/hour)
         """
-        return round(taktfrequenz,2)
+        return round(frequenz,2)
 
     data = schedule[place]
     cols = data.columns
