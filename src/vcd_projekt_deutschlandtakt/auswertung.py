@@ -11,6 +11,7 @@ from pathlib import Path
 import pandas as pd
 from pandas import DataFrame
 
+COL_DESTINATION = 'Verbindung nach'
 
 def read_all_data(file_path: Path) -> dict[str, DataFrame] | None:
     """
@@ -32,12 +33,12 @@ def read_all_data(file_path: Path) -> dict[str, DataFrame] | None:
     return None
 
 
-def calculation_grundlegend(schedule: dict[str, pd.DataFrame], place: str) -> pd.DataFrame:
+def calculation_grundlegend(schedule_data: pd.DataFrame, place: str) -> pd.DataFrame:
     """
     Calulates all basic parameters for evaluation: Reisezeit (ra),
     Beförderungsgeschwindigkeit (bg), Komfort (as) and Taktfrequenz (zv).
 
-    :param schedule: The entire schedule Excel sheet.
+    :param schedule_data: The entire schedule Excel sheet.
     :param place: Indicates the departure station.
     :return: basic_params: a pd.DataFrame including all basic parameters to be calculated.
     """
@@ -88,10 +89,10 @@ def calculation_grundlegend(schedule: dict[str, pd.DataFrame], place: str) -> pd
         """
         return round(taktfrequenz,2)
 
-    data = schedule[place]
+    data = schedule_data
     cols = data.columns
 
-    destination = data[cols[0]]
+    destination = data[COL_DESTINATION]
     t_bahn = data[cols[1]]
     t_auto = data[cols[2]]
     s_bahn = data[cols[3]]
@@ -116,7 +117,12 @@ if __name__ == '__main__':
     """
     First Evaluation only for Jahresfahrplan 2025, to check if the code works correct
     """
-    evaluation, locations = read_all_data("Auswertung Fahrplan 2025.xlsx")
+    file_name = "Auswertung Fahrplan 2025.xlsx"
+    data_path = Path("../../data")
+    print((data_path / file_name).resolve())
+    evaluation = read_all_data(data_path / file_name)
+    locations = evaluation.keys()
 
     for location in locations:
-        print(calculation_grundlegend(evaluation, location))
+        print(calculation_grundlegend(evaluation[location], location))
+
