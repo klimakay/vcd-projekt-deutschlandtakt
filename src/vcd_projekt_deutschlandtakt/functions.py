@@ -7,8 +7,7 @@
 from pathlib import Path
 
 import pandas as pd
-from pandas import DataFrame
-
+from pandas import DataFrame, Series
 
 COL_DESTINATION = 'Verbindung nach'
 
@@ -33,13 +32,12 @@ def read_all_data(file_path: Path) -> dict[str, DataFrame] | None:
     return None
 
 
-def calculation_grundlegend(schedule_data: pd.DataFrame, place: str) -> pd.DataFrame:
+def calculation_grundlegend(schedule_data: pd.DataFrame) -> pd.DataFrame:
     """
     Calulates all basic parameters for evaluation: Reisezeit (ra),
     Beförderungsgeschwindigkeit (bg), Komfort (as) and Taktfrequenz (zv).
 
     :param schedule_data: The entire schedule Excel sheet.
-    :param place: Indicates the departure station.
     :return: basic_params: a pd.DataFrame including all basic parameters to be calculated.
     """
 
@@ -113,3 +111,17 @@ def calculation_grundlegend(schedule_data: pd.DataFrame, place: str) -> pd.DataF
                                  "Taktfrequenz": zv})
 
     return basic_params
+
+
+def gewichtung(primary_idx: pd.DataFrame) -> Series | DataFrame:
+    parameters = primary_idx.columns[1:]
+    for col in parameters:
+        ratio = primary_idx[col]/primary_idx[col].mean()
+
+        if col == "Reisezeit Vehältnis":
+            primary_idx[col] = round((2 - ratio) * 100, 2)  # for percentage
+
+        else:
+            primary_idx[col] = round(ratio * 100, 2)  # for percentage
+
+    return primary_idx
