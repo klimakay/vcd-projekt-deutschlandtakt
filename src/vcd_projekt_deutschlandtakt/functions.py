@@ -114,6 +114,11 @@ def calculation_grundlegend(schedule_data: pd.DataFrame) -> pd.DataFrame:
 
 
 def gewichtung(primary_idx: pd.DataFrame) -> Series | DataFrame:
+    """
+    Calculates a weighted index for time-dependent and distance-independent input variables.
+    :param primary_idx: weighted index
+    :return: weighted index for time-dependent and distance-independent input variables
+    """
     parameters = primary_idx.columns[1:]
     for col in parameters:
         ratio = primary_idx[col]/primary_idx[col].mean()
