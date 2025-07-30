@@ -10,7 +10,7 @@ from pathlib import Path
 
 from functions import read_all_data, calculation_grundlegend, gewichtung
 
-#Testcase
+#  Testcase
 if __name__ == '__main__':
     """
     First Evaluation only for Jahresfahrplan 2025, to check if the code works correct
