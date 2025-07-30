@@ -39,7 +39,6 @@ def calculation_grundlegend(schedule_data: pd.DataFrame) -> pd.DataFrame:
     Beförderungsgeschwindigkeit (bg), Komfort (as) and Taktfrequenz (zv).
 
     :param schedule_data: The entire schedule Excel sheet.
-    :param place: Indicates the departure station.
     :return: basic_params: a pd.DataFrame including all basic parameters to be calculated.
     """
 
