@@ -112,6 +112,8 @@ def calculation_grundlegend(schedule_data: pd.DataFrame, place: str) -> pd.DataF
 
     return basic_params
 
+
+
 #Testcase
 if __name__ == '__main__':
     """
