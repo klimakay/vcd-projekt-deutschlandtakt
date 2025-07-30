@@ -116,6 +116,7 @@ def calculation_grundlegend(schedule_data: pd.DataFrame, place: str) -> pd.DataF
 if __name__ == '__main__':
     """
     First Evaluation only for Jahresfahrplan 2025, to check if the code works correct
+    Please check the correct data_path in the end if some troubles occur when the file will be read.
     """
     file_name = "Auswertung Fahrplan 2025.xlsx"
     data_path = Path("../../data")
