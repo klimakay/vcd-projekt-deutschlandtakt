@@ -7,9 +7,7 @@
 from pathlib import Path
 
 import pandas as pd
-from pandas import DataFrame
-from pandas import Index
-
+from pandas import DataFrame, Series
 
 COL_DESTINATION = 'Verbindung nach'
 
