@@ -113,3 +113,5 @@ def calculation_grundlegend(schedule_data: pd.DataFrame, place: str) -> pd.DataF
                                  "Taktfrequenz": zv})
 
     return basic_params
+
+
