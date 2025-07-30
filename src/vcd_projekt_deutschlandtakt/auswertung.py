@@ -19,8 +19,5 @@ if __name__ == '__main__':
     file_name = "Auswertung Fahrplan 2025.xlsx"
     data_path = Path("../../data")
     evaluation = read_all_data(data_path / file_name)
-    locations = evaluation.keys()
-
-    for location in locations:
-        print(calculation_grundlegend(evaluation[location], location))
+    destinations = evaluation.keys()
 
