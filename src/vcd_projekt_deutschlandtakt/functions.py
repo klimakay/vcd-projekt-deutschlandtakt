@@ -113,3 +113,17 @@ def calculation_grundlegend(schedule_data: pd.DataFrame) -> pd.DataFrame:
                                  "Taktfrequenz": zv})
 
     return basic_params
+
+
+def gewichtung(primary_idx: pd.DataFrame) -> Series | DataFrame:
+    parameters = primary_idx.columns[1:]
+    for col in parameters:
+        ratio = primary_idx[col]/primary_idx[col].mean()
+
+        if col == "Reisezeit Vehältnis":
+            primary_idx[col] = round((2 - ratio) * 100, 2)  # for percentage
+
+        else:
+            primary_idx[col] = round(ratio * 100, 2)  # for percentage
+
+    return primary_idx
