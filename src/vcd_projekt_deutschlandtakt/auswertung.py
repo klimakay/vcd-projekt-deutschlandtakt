@@ -8,7 +8,7 @@
 
 from pathlib import Path
 
-from functions import read_all_data, calculation_grundlegend
+from functions import read_all_data, calculation_grundlegend, gewichtung
 
 #Testcase
 if __name__ == '__main__':
