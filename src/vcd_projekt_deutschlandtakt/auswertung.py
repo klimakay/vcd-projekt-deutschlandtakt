@@ -21,3 +21,6 @@ if __name__ == '__main__':
     evaluation = read_all_data(data_path / file_name)
     destinations = evaluation.keys()
 
+    for destination in destinations:
+        results = calculation_grundlegend(evaluation[destination])
+        print(gewichtung(results))
