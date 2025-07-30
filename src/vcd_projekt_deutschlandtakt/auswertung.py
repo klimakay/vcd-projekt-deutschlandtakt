@@ -10,6 +10,8 @@ from pathlib import Path
 
 from functions import read_all_data, calculation_grundlegend
 
+
+
 #Testcase
 if __name__ == '__main__':
     """
