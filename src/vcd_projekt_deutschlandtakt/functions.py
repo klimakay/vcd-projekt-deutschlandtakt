@@ -33,7 +33,7 @@ def read_all_data(file_path: Path) -> dict[str, DataFrame] | None:
     return None
 
 
-def calculation_grundlegend(schedule_data: pd.DataFrame, place: str) -> pd.DataFrame:
+def calculation_grundlegend(schedule_data: pd.DataFrame) -> pd.DataFrame:
     """
     Calulates all basic parameters for evaluation: Reisezeit (ra),
     Beförderungsgeschwindigkeit (bg), Komfort (as) and Taktfrequenz (zv).
