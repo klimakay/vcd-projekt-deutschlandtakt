@@ -1,6 +1,8 @@
 """
     All functions are stored here that are used to read data, evaluate the general parameters (step 1), and the
-    reachability index (step 2).
+    reachability index (step 2). The variable L_SCHALTER can be used to switch on the model mode for
+    data with transfer connections. The corresponding data must be listed in the Excel table as described in the
+     code.
 """
 
 
@@ -10,7 +12,7 @@ import pandas as pd
 from pandas import DataFrame, Series
 
 COL_DESTINATION = 'Verbindung nach'
-L_SCHALTER = True
+L_SCHALTER = False
 
 
 def read_all_data(file_path: Path) -> dict[str, DataFrame] | None:
@@ -55,7 +57,7 @@ def calculation_grundlegend(schedule_data: pd.DataFrame) -> pd.DataFrame:
 
 
     def befoerderungsgeschwindigkeit(strecke_bahn: pd.DataFrame, zeit_bahn: pd.DataFrame,
-                                     umsteigezeit=0) -> pd.DataFrame:
+                                     umsteigezeit: pd.DataFrame | float | None=None) -> pd.DataFrame:
         """
         Calculate the pure travel speed with the distance traveled and the pure travel time with the train.
 
@@ -65,8 +67,33 @@ def calculation_grundlegend(schedule_data: pd.DataFrame) -> pd.DataFrame:
         necessary.
         :return:
         """
+        if L_SCHALTER is False:
+            umsteigezeit = 0
+
 
         return round(strecke_bahn / (zeit_bahn - umsteigezeit), 2)
+    if L_SCHALTER:
+        def umsteigezwang(strecke_bahn: pd.DataFrame, anzahl_umsteigevorgang:pd.DataFrame) -> pd.DataFrame:
+            """
+            Calculates the ratio of transits along distance traveled by train.
+
+            :param strecke_bahn: Distance traveled by train in km.
+            :param anzahl_umsteigevorgang: Number of transits.
+            :return: Umsteigezwang (%/km)
+            """
+
+            return round(anzahl_umsteigevorgang * 100 / strecke_bahn, 2)
+    elif L_SCHALTER:
+        def umsteigezeit_ratio(zeit_bahn: pd.DataFrame, umsteigezeit: pd.DataFrame) -> pd.DataFrame:
+            """
+            Calculates the ratio of zeit between transits and the actual travel time.
+
+            :param zeit_bahn: Time traveled by train in min.
+            :param umsteigezeit: Time for transit in minute.
+            :return: Umsteigezeit (min).
+            """
+
+            return round(umsteigezeit / zeit_bahn * 100, 2)
 
 
     def komfort(strecke_bahn: pd.DataFrame, strecke_auto: pd.DataFrame) -> pd.DataFrame:
@@ -99,19 +126,38 @@ def calculation_grundlegend(schedule_data: pd.DataFrame) -> pd.DataFrame:
     s_bahn = data[cols[3]]
     s_auto = data[cols[4]]
     taktfrequenz = data[cols[5]]
+    if L_SCHALTER:
+        t_u = data[cols[6]]
+        U = data[cols[7]]
+
 
     ra = reisezeit(zeit_bahn=t_bahn,zeit_auto=t_auto)
     bg = befoerderungsgeschwindigkeit(strecke_bahn=s_bahn,zeit_bahn=t_bahn)
     ks = komfort(strecke_bahn=s_bahn, strecke_auto=s_auto)
     zv = takt(taktfrequenz)
+    if L_SCHALTER:
+        uv = umsteigezwang(strecke_bahn=s_bahn, anzahl_umsteigevorgang=U)
+        ua = umsteigezeit_ratio(zeit_bahn=t_bahn, umsteigezeit=t_u)
+        bg = befoerderungsgeschwindigkeit(strecke_bahn=s_bahn, zeit_bahn=t_bahn, umsteigezeit=t_u)
 
-    basic_params = pd.DataFrame({"Ziel": destination,
-                                 "Reisezeit Verhältnis": ra,
-                                 "Beförderungsgeschwindigkeit": bg,
-                                 "Komfort": ks,
-                                 "Taktfrequenz": zv})
+    if L_SCHALTER:
+        basic_params = pd.DataFrame({"Ziel": destination,
+                                     "Reisezeit Verhältnis": ra,
+                                     "Beförderungsgeschwindigkeit": bg,
+                                     "Komfort": ks,
+                                     "Taktfrequenz": zv,
+                                     "Umsteigezeitverhältnis": ua,
+                                     "Umsteigezwang": uv})
 
-    return basic_params
+        return basic_params
+    else:
+        basic_params = pd.DataFrame({"Ziel": destination,
+                                     "Reisezeit Verhältnis": ra,
+                                     "Beförderungsgeschwindigkeit": bg,
+                                     "Komfort": ks,
+                                     "Taktfrequenz": zv})
+
+        return basic_params
 
 
 def gewichtung(primary_idx: pd.DataFrame) -> Series | DataFrame:
@@ -124,10 +170,19 @@ def gewichtung(primary_idx: pd.DataFrame) -> Series | DataFrame:
     for col in parameters:
         ratio = primary_idx[col]/primary_idx[col].mean()
 
-        if col == "Reisezeit Vehältnis":
-            primary_idx[col] = round((2 - ratio) * 100, 2)  # for percentage
-
+        if L_SCHALTER:
+            if col == "Reisezeit Vehältnis":
+                primary_idx[col] = round((2 - ratio) * 100, 2)  # for percentage
+            elif col == "Umsteigezeitverhältnis":
+                primary_idx[col] = round((2 - ratio) * 100, 2)
+            elif col == "Umsteigezwang":
+                primary_idx[col] = round((2 - ratio) * 100, 2)
+            else:
+                primary_idx[col] = round(ratio * 100, 2)  # for percentage
         else:
-            primary_idx[col] = round(ratio * 100, 2)  # for percentage
+            if col == "Reisezeit Vehältnis":
+                primary_idx[col] = round((2 - ratio) * 100, 2)
+            else:
+                primary_idx[col] = round(ratio * 100, 2)
 
     return primary_idx
