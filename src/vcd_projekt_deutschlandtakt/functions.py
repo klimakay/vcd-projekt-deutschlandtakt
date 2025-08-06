@@ -67,7 +67,7 @@ def calculation_grundlegend(schedule_data: pd.DataFrame) -> pd.DataFrame:
         necessary.
         :return: travel speed in km/h
         """
-        if L_SCHALTER is False:
+        if not L_SCHALTER:
             umsteigezeit = 0
 
 
