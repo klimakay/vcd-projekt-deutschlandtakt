@@ -167,10 +167,11 @@ def calculation_grundlegend(schedule_data: pd.DataFrame) -> pd.DataFrame:
 
 def gewichtung(primary_idx: pd.DataFrame) -> Series | DataFrame:
     """
-    Calculates a weighted, relative index for time-dependent and distance-independent input variables to make them
-    dimensionally homogeneous.
-    :param primary_idx: weighted index
-    :return: weighted index for time-dependent and distance-independent input variables
+    Calculates a weighted index for time-dependent and distance-independent input variables.
+    :param primary_idx: Dataframe that consists of the primary parameters for different origins to a certain
+    destination.
+    :return primary_idx: A new pd.Series or pd.DataFame based on the input DataFrame that consists of the weighted
+    index for time-dependent and distance-independent input variables.
     """
     parameters = primary_idx.columns[1:]
     for col in parameters:
