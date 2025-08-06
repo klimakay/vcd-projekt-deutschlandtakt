@@ -73,6 +73,7 @@ def calculation_grundlegend(schedule_data: pd.DataFrame) -> pd.DataFrame:
 
         return round(strecke_bahn / (zeit_bahn - umsteigezeit), 2)
 
+
     def komfort(strecke_bahn: pd.DataFrame, strecke_auto: pd.DataFrame) -> pd.DataFrame:
         """
         Calculates the comfort index by dividing the distance traveled by train in km with the distance traveled
