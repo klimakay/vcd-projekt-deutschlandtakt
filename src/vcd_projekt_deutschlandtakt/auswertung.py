@@ -8,7 +8,7 @@
 
 from pathlib import Path
 
-from functions import read_all_data, calculation_grundlegend, gewichtung
+from functions import read_all_data, calculation_grundlegend, gewichtung, erschliessungsqualitaet
 
 #  Testcase
 if __name__ == '__main__':
@@ -19,8 +19,10 @@ if __name__ == '__main__':
     file_name = "Auswertung Fahrplan 2025.xlsx"
     data_path = Path("../../data")
     evaluation = read_all_data(data_path / file_name)
-    destinations = evaluation.keys()
+    departures = evaluation.keys()
 
-    for destination in destinations:
-        results = calculation_grundlegend(evaluation[destination])
-        print(gewichtung(results))
+    for departure in departures:
+        results = calculation_grundlegend(evaluation[departure])
+        fahrplan = gewichtung(results)
+        print(departure)
+        print(erschliessungsqualitaet(fahrplan))

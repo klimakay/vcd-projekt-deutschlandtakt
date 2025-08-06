@@ -210,3 +210,16 @@ def gewichtung(primary_idx: pd.DataFrame) -> Series | DataFrame:
             primary_idx[col] = primary_idx[col] * d[col]
 
     return primary_idx
+
+def erschliessungsqualitaet(weighted_idx: DataFrame) -> Series | DataFrame:
+    """
+
+    :param weighted_idx:
+    :return:
+    """
+    destinations = weighted_idx.index.values
+    # eqs = []
+    for dest in destinations:
+        eq = weighted_idx.loc[dest].sum()
+       # eqs.append(eq)
+        print(dest, eq)
