@@ -178,18 +178,39 @@ def gewichtung(primary_idx: pd.DataFrame) -> Series | DataFrame:
         ratio = primary_idx[col]/primary_idx[col].mean()
 
         if L_SCHALTER:
+            # Gewichtungsfaktoren
+            d = {"Komfort": 0.242,
+                 "Reisezeit Verhältnis": 0.379,
+                 "Beförderungsgeschwindigkeit": 0.131,
+                 "Taktfrequenz": 0.072,
+                 "Umsteigezeitverhältnis": 0.088,
+                 "Umsteigezwang": 0.088
+                 }
+
             if col == "Reisezeit Vehältnis":
-                primary_idx[col] = round((2 - ratio) * 100, 2)  # for percentage
+                primary_idx[col] = (2 - ratio) * 100  # for percentage
             elif col == "Umsteigezeitverhältnis":
-                primary_idx[col] = round((2 - ratio) * 100, 2)
+                primary_idx[col] = (2 - ratio) * 100
             elif col == "Umsteigezwang":
-                primary_idx[col] = round((2 - ratio) * 100, 2)
+                primary_idx[col] = (2 - ratio) * 100
             else:
-                primary_idx[col] = round(ratio * 100, 2)  # for percentage
+                primary_idx[col] = ratio * 100  # for percentage
+
+            primary_idx[col] = primary_idx[col] * d[col]
+
         else:
+            # Gewichtungsfaktoren
+            d = {"Komfort": 0.294,
+                 "Reisezeit Verhältnis": 0.460,
+                 "Beförderungsgeschwindigkeit": 0.159,
+                 "Taktfrequenz": 0.087,
+                 }
+
             if col == "Reisezeit Vehältnis":
-                primary_idx[col] = round((2 - ratio) * 100, 2)
+                primary_idx[col] = (2 - ratio) * 100
             else:
-                primary_idx[col] = round(ratio * 100, 2)
+                primary_idx[col] = ratio * 100
+
+            primary_idx[col] = primary_idx[col] * d[col]
 
     return primary_idx
