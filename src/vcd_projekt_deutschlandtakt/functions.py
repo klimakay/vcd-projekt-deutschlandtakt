@@ -149,18 +149,6 @@ def calculation_grundlegend(schedule_data: pd.DataFrame) -> pd.DataFrame:
         bg = befoerderungsgeschwindigkeit(strecke_bahn=s_bahn, zeit_bahn=t_bahn)
         ks = komfort(strecke_bahn=s_bahn, strecke_auto=s_auto)
         zv = takt(taktfrequenz)
-
-    if L_SCHALTER:
-        basic_params = pd.DataFrame({"Ziel": destination,
-                                     "Reisezeit Verhältnis": ra,
-                                     "Beförderungsgeschwindigkeit": bg,
-                                     "Komfort": ks,
-                                     "Taktfrequenz": zv,
-                                     "Umsteigezeitverhältnis": ua,
-                                     "Umsteigezwang": uv})
-
-        return basic_params
-    else:
         basic_params = pd.DataFrame({"Ziel": destination,
                                      "Reisezeit Verhältnis": ra,
                                      "Beförderungsgeschwindigkeit": bg,
