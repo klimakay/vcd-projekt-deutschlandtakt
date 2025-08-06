@@ -155,7 +155,7 @@ def calculation_grundlegend(schedule_data: pd.DataFrame) -> pd.DataFrame:
                                      "Komfort": ks,
                                      "Taktfrequenz": zv})
 
-        return basic_params
+    return basic_params
 
 
 def gewichtung(primary_idx: pd.DataFrame) -> Series | DataFrame:
