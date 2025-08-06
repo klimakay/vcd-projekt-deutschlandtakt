@@ -12,7 +12,7 @@ import pandas as pd
 from pandas import DataFrame, Series
 
 COL_DESTINATION = 'Verbindung nach'
-L_SCHALTER = False
+L_SCHALTER = True
 
 
 def read_all_data(file_path: Path) -> dict[str, DataFrame] | None:
@@ -83,7 +83,7 @@ def calculation_grundlegend(schedule_data: pd.DataFrame) -> pd.DataFrame:
             """
 
             return round(anzahl_umsteigevorgang * 100 / strecke_bahn, 2)
-    elif L_SCHALTER:
+
         def umsteigezeit_ratio(zeit_bahn: pd.DataFrame, umsteigezeit: pd.DataFrame) -> pd.DataFrame:
             """
             Calculates the ratio of zeit between transits and the actual travel time.
@@ -131,14 +131,19 @@ def calculation_grundlegend(schedule_data: pd.DataFrame) -> pd.DataFrame:
         U = data[cols[7]]
 
 
-    ra = reisezeit(zeit_bahn=t_bahn,zeit_auto=t_auto)
-    bg = befoerderungsgeschwindigkeit(strecke_bahn=s_bahn,zeit_bahn=t_bahn)
-    ks = komfort(strecke_bahn=s_bahn, strecke_auto=s_auto)
-    zv = takt(taktfrequenz)
+
     if L_SCHALTER:
+        ra = reisezeit(zeit_bahn=t_bahn, zeit_auto=t_auto)
+        bg = befoerderungsgeschwindigkeit(strecke_bahn=s_bahn, zeit_bahn=t_bahn, umsteigezeit=t_u)
+        ks = komfort(strecke_bahn=s_bahn, strecke_auto=s_auto)
+        zv = takt(taktfrequenz)
         uv = umsteigezwang(strecke_bahn=s_bahn, anzahl_umsteigevorgang=U)
         ua = umsteigezeit_ratio(zeit_bahn=t_bahn, umsteigezeit=t_u)
-        bg = befoerderungsgeschwindigkeit(strecke_bahn=s_bahn, zeit_bahn=t_bahn, umsteigezeit=t_u)
+    else:
+        ra = reisezeit(zeit_bahn=t_bahn, zeit_auto=t_auto)
+        bg = befoerderungsgeschwindigkeit(strecke_bahn=s_bahn, zeit_bahn=t_bahn)
+        ks = komfort(strecke_bahn=s_bahn, strecke_auto=s_auto)
+        zv = takt(taktfrequenz)
 
     if L_SCHALTER:
         basic_params = pd.DataFrame({"Ziel": destination,
