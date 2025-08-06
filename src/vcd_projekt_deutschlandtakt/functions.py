@@ -168,7 +168,8 @@ def gewichtung(primary_idx: pd.DataFrame) -> Series | DataFrame:
     :return primary_idx: A new pd.Series or pd.DataFame based on the input DataFrame that consists of the weighted
     index for time-dependent and distance-independent input variables.
     """
-    parameters = primary_idx.columns[1:]
+    primary_idx.set_index("Ziel", drop=True, inplace=True)
+    parameters = primary_idx.columns[:]
     for col in parameters:
         ratio = primary_idx[col]/primary_idx[col].mean()
 
@@ -209,13 +210,3 @@ def gewichtung(primary_idx: pd.DataFrame) -> Series | DataFrame:
             primary_idx[col] = primary_idx[col] * d[col]
 
     return primary_idx
-
-def erschliessungsqualitaet(weighted_idx: DataFrame) -> Series | DataFrame:
-    """
-
-    :param weighted_idx:
-    :return:
-    """
-    for i in
-        eq = sum(weighted_idx.iloc[i,:])
-    # Rundung wieder einfügen
