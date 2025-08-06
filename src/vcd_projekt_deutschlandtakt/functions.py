@@ -137,8 +137,8 @@ def calculation_grundlegend(schedule_data: pd.DataFrame) -> pd.DataFrame:
         bg = befoerderungsgeschwindigkeit(strecke_bahn=s_bahn, zeit_bahn=t_bahn, umsteigezeit=t_u)
         ks = komfort(strecke_bahn=s_bahn, strecke_auto=s_auto)
         zv = takt(taktfrequenz)
-        uv = umsteigezwang(strecke_bahn=s_bahn, anzahl_umsteigevorgang=U)
         ua = umsteigezeit_ratio(zeit_bahn=t_bahn, umsteigezeit=t_u)
+        uv = umsteigezwang(strecke_bahn=s_bahn, anzahl_umsteigevorgang=U)
     else:
         ra = reisezeit(zeit_bahn=t_bahn, zeit_auto=t_auto)
         bg = befoerderungsgeschwindigkeit(strecke_bahn=s_bahn, zeit_bahn=t_bahn)
