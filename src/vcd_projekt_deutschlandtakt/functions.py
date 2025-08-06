@@ -71,30 +71,7 @@ def calculation_grundlegend(schedule_data: pd.DataFrame) -> pd.DataFrame:
             umsteigezeit = 0
 
         return round(strecke_bahn / (zeit_bahn - umsteigezeit), 2)
-    if L_SCHALTER:
-        def umsteigezwang(strecke_bahn: pd.DataFrame, anzahl_umsteigevorgang:pd.DataFrame) -> pd.DataFrame:
-            """
-            Calculates the ratio of transits along distance traveled by train.
-
-            :param strecke_bahn: Distance traveled by train in km.
-            :param anzahl_umsteigevorgang: Number of transits.
-            :return: Umsteigezwang (%/km)
-            """
-
-            return round(anzahl_umsteigevorgang * 100 / strecke_bahn, 2)
-
-        def umsteigezeit_ratio(zeit_bahn: pd.DataFrame, umsteigezeit: pd.DataFrame) -> pd.DataFrame:
-            """
-            Calculates the ratio of zeit between transits and the actual travel time.
-
-            :param zeit_bahn: Time traveled by train in min.
-            :param umsteigezeit: Time for transit in minute.
-            :return: Umsteigezeit (min).
-            """
-
-            return round(umsteigezeit / zeit_bahn * 100, 2)
-
-
+    
     def komfort(strecke_bahn: pd.DataFrame, strecke_auto: pd.DataFrame) -> pd.DataFrame:
         """
         Calculates the comfort index by dividing the distance traveled by train in km with the distance traveled
