@@ -43,7 +43,7 @@ def calculation_grundlegend(schedule_data: pd.DataFrame) -> pd.DataFrame:
     :param schedule_data: The entire schedule Excel sheet.
     :return: basic_params: a pd.DataFrame including all basic parameters to be calculated.
     """
-    
+
 
     def reisezeit(zeit_bahn: pd.DataFrame, zeit_auto: pd.DataFrame) -> pd.DataFrame:
         """
@@ -87,13 +87,13 @@ def calculation_grundlegend(schedule_data: pd.DataFrame) -> pd.DataFrame:
         return round(strecke_bahn / strecke_auto, 2)
 
 
-    def takt(taktfrequenz: pd.DataFrame) -> pd.DataFrame:
+    def takt(frequenz: pd.DataFrame) -> pd.DataFrame:
         """
         Gives back the number of trains per hour (taktfrequenz)
-        :param taktfrequenz: number of trains/hour
+        :param frequenz: number of trains/hour
         :return: taktfrequenz (number of trains/hour)
         """
-        return round(taktfrequenz,2)
+        return round(frequenz,2)
 
 
     data = schedule_data
