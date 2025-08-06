@@ -6,7 +6,9 @@ der Landesnahverkehrsgesellschaft Niedersachsen (LNVG) verwendet, welche als Exc
 Die Fahrplandaten sind dort Betriebsstellen bzw. Bahnhöfen im Großraum Hannover zugeordnet.
 Die Methodik zur Auswertung basiert dabei auf dem Erreichbarkeitsmodell von Stephan Bunge:  
 **Bunge, Stephan, 2011. Analyse und Bewertung der regionalen Erschließungsqualität im Schienenpersonenfernverkehr. Diss. TU Berlin.**  
-Das von Bunge verwendete Modell wurde dabei adaptiert und auf den Schienenpersonennahverkehr angewendet.
+Das von Bunge verwendete Modell wurde dabei adaptiert und auf den Schienenpersonennahverkehr angewendet, womit es keine Umstiegsverbindungen
+im default modus berücksichtigt. Eine im Modell befindliche Variable L_SCHALTER kann aber Umsteigeverbindungen und damit potenziell auch Fernverkehr
+berücksichtigen. Hierzu müssen die Daten wie in der im Code beschriebenen Form vorliegen.
 Das Modell gibt als Auswertung der Input Dateien für jeden untersuchten Ort jeweils eine Zahl aus, welche als Indikatorgröße die Erreichbarkeit eines Ortes im jeweiligen Fahrplan quantifizierbar macht.
 Die Ergebnisse werden am Ende wieder als Excel-Datei für den jeweiligen Fahrplan ausgegeben.  
 Konkrete Ergebnisse, weitere Datenquellen sowie die gesammelte Methodik des Modells werden später vom [Verkehrsclub Deutschland (VCD) Landesverband Niedersachsen](https://niedersachsen.vcd.org/) als Publikation veröffentlicht.
