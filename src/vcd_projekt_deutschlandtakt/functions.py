@@ -65,7 +65,7 @@ def calculation_grundlegend(schedule_data: pd.DataFrame) -> pd.DataFrame:
         :param zeit_bahn: Time traveled by train in min.
         :param umsteigezeit: Time for transit in minute. Note that it is 0 by default, for cases when no transits are
         necessary.
-        :return:
+        :return: travel speed in km/h
         """
         if L_SCHALTER is False:
             umsteigezeit = 0
