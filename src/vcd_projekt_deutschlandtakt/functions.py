@@ -223,3 +223,6 @@ def erschliessungsqualitaet(weighted_idx: DataFrame) -> Series | DataFrame:
         eq = weighted_idx.loc[dest].sum()
        # eqs.append(eq)
         print(dest, eq)
+    # todo: complete this function to output/display eq for every destination-departure pair
+
+# todo: write function "averaging" over every departure
