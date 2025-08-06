@@ -70,7 +70,6 @@ def calculation_grundlegend(schedule_data: pd.DataFrame) -> pd.DataFrame:
         if not L_SCHALTER:
             umsteigezeit = 0
 
-
         return round(strecke_bahn / (zeit_bahn - umsteigezeit), 2)
     if L_SCHALTER:
         def umsteigezwang(strecke_bahn: pd.DataFrame, anzahl_umsteigevorgang:pd.DataFrame) -> pd.DataFrame:
