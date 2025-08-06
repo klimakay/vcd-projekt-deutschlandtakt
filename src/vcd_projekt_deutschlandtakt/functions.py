@@ -126,6 +126,7 @@ def calculation_grundlegend(schedule_data: pd.DataFrame) -> pd.DataFrame:
     s_bahn = data[cols[3]]
     s_auto = data[cols[4]]
     taktfrequenz = data[cols[5]]
+
     if L_SCHALTER:
         t_u = data[cols[6]]
         U = data[cols[7]]
