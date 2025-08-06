@@ -129,10 +129,6 @@ def calculation_grundlegend(schedule_data: pd.DataFrame) -> pd.DataFrame:
     if L_SCHALTER:
         t_u = data[cols[6]]
         U = data[cols[7]]
-
-
-
-    if L_SCHALTER:
         ra = reisezeit(zeit_bahn=t_bahn, zeit_auto=t_auto)
         bg = befoerderungsgeschwindigkeit(strecke_bahn=s_bahn, zeit_bahn=t_bahn, umsteigezeit=t_u)
         ks = komfort(strecke_bahn=s_bahn, strecke_auto=s_auto)
