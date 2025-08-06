@@ -12,7 +12,7 @@ import pandas as pd
 from pandas import DataFrame, Series
 
 COL_DESTINATION = 'Verbindung nach'
-L_SCHALTER = True
+L_SCHALTER = False
 
 
 def read_all_data(file_path: Path) -> dict[str, DataFrame] | None:

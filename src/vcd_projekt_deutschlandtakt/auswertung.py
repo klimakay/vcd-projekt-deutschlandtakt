@@ -16,7 +16,7 @@ if __name__ == '__main__':
     First Evaluation only for Jahresfahrplan 2025, to check if the code works correct
     Please check the correct data_path in the end if some troubles occur when the file will be read.
     """
-    file_name = "Test Wunstorf Basche.xlsx"
+    file_name = "Auswertung Fahrplan Deutschlandtakt.xlsx"
     data_path = Path("../../data")
     evaluation = read_all_data(data_path / file_name)
     destinations = evaluation.keys()
