@@ -34,11 +34,12 @@ def read_all_data(file_path: Path) -> dict[str, DataFrame] | None:
     return None
 
 
-def calculation_grundlegend(schedule_data: pd.DataFrame) -> pd.DataFrame:
+def calculation_grundlegend(schedule_data: pd.DataFrame, schalter = False) -> pd.DataFrame:
     """
     Calulates all basic parameters for evaluation: Reisezeit (ra),
     Beförderungsgeschwindigkeit (bg), Komfort (as) and Taktfrequenz (zv).
 
+    :param schalter: Determines if transits are considered or not.
     :param schedule_data: The entire schedule Excel sheet.
     :return: basic_params: a pd.DataFrame including all basic parameters to be calculated.
     """
@@ -67,7 +68,7 @@ def calculation_grundlegend(schedule_data: pd.DataFrame) -> pd.DataFrame:
         necessary.
         :return: travel speed in km/h
         """
-        if not L_SCHALTER:
+        if not schalter:
             umsteigezeit = 0
 
         return round(strecke_bahn / (zeit_bahn - umsteigezeit), 2)
@@ -104,7 +105,7 @@ def calculation_grundlegend(schedule_data: pd.DataFrame) -> pd.DataFrame:
     s_auto = data[cols[4]]
     taktfrequenz = data[cols[5]]
 
-    if L_SCHALTER:
+    if schalter:
 
         def umsteigezwang(strecke_bahn: pd.DataFrame, anzahl_umsteigevorgang:pd.DataFrame) -> pd.DataFrame:
             """
@@ -159,9 +160,10 @@ def calculation_grundlegend(schedule_data: pd.DataFrame) -> pd.DataFrame:
     return basic_params
 
 
-def gewichtung(primary_idx: pd.DataFrame) -> Series | DataFrame:
+def gewichtung(primary_idx: pd.DataFrame, schalter = False) -> Series | DataFrame:
     """
     Calculates a weighted index for time-dependent and distance-independent input variables.
+    :param schalter: A bool that dDetermines if transits are considered or not.
     :param primary_idx: Dataframe that consists of the primary parameters for different origins to a certain
     destination.
     :return primary_idx: A new pd.Series or pd.DataFame based on the input DataFrame that consists of the weighted
@@ -172,7 +174,7 @@ def gewichtung(primary_idx: pd.DataFrame) -> Series | DataFrame:
     for col in parameters:
         ratio = primary_idx[col]/primary_idx[col].mean()
 
-        if L_SCHALTER:
+        if schalter:
             # Gewichtungsfaktoren
             d = {"Komfort": 0.242,
                  "Reisezeit Verhältnis": 0.379,
