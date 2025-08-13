@@ -221,8 +221,17 @@ def erschliessungsqualitaet(weighted_idx: DataFrame) -> dict:
     eq = {}
     for dest in destinations:
         eq[dest] = weighted_idx.loc[dest].sum()  # weighted_idx.loc[dest].sum() is the e
-
     return eq
     # todo: complete this function to output/display eq for every destination-departure pair
 
 # todo: write function "averaging" over every departure
+
+def resultat(eq_wert: dict) -> DataFrame:
+    """
+
+    :param eq_wert:
+    :return:
+    """
+    eq_df = pd.DataFrame.from_dict(eq_wert, orient='index')
+    eq_ort = eq_df.sum()/len(eq_df)
+    return eq_ort
