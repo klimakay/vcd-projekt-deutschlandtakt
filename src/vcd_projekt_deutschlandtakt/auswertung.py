@@ -16,8 +16,8 @@ from functions import read_all_data, calculation_grundlegend, gewichtung, erschl
 #  Testcase
 if __name__ == '__main__':
     """
-    First Evaluation only for Jahresfahrplan 2025, to check if the code works correct
-    Please check the correct data_path in the end if some troubles occur when the file will be read.
+    Please check the correct path for in- and output files, so that nothing is overwritten
+    that does not belong to the respective data.
     """
     input_file = "Auswertung Fahrplan 2025.xlsx"
     output_file = "Output Fahrplan 2025.xlsx"
