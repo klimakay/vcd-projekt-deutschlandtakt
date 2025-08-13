@@ -8,6 +8,8 @@
 
 from pathlib import Path
 
+import pandas as pd
+
 from functions import read_all_data, calculation_grundlegend, gewichtung, erschliessungsqualitaet, resultat
 
 #  Testcase
