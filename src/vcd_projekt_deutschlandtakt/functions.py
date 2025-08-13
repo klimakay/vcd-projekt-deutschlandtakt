@@ -168,7 +168,8 @@ def gewichtung(primary_idx: pd.DataFrame) -> Series | DataFrame:
     :return primary_idx: A new pd.Series or pd.DataFame based on the input DataFrame that consists of the weighted
     index for time-dependent and distance-independent input variables.
     """
-    parameters = primary_idx.columns[1:]
+    primary_idx.set_index("Ziel", drop=True, inplace=True)
+    parameters = primary_idx.columns[:]
     for col in parameters:
         ratio = primary_idx[col]/primary_idx[col].mean()
 
@@ -209,3 +210,28 @@ def gewichtung(primary_idx: pd.DataFrame) -> Series | DataFrame:
             primary_idx[col] = primary_idx[col] * d[col]
 
     return primary_idx
+
+def erschliessungsqualitaet(weighted_idx: DataFrame) -> dict:
+    """
+    Calculates the sum of the different weighted parameters per line, so over all destinations
+
+    :param weighted_idx: Contains the diffrent weighted indexes from function gewichtung.
+    :return eq: a dictionary which contains the sums of weighted index.
+    """
+    destinations = weighted_idx.index.values
+    eq = {}
+    for dest in destinations:
+        eq[dest] = weighted_idx.loc[dest].sum()  # weighted_idx.loc[dest].sum() is the e
+    return eq
+
+def resultat(eq_wert: dict) -> DataFrame:
+    """
+    This function converts in the end first the input dictionary to a Dataframe and then the mean over
+    the whole number of destinations. This is the final result.
+    :param eq_wert: input dictionary which contains the sums of weighted index over all destinations.
+    :param eq_df: converts the dictionary back into a Dataframe
+    :return eq_ort: the mean over all destinations.
+    """
+    eq_df = pd.DataFrame.from_dict(eq_wert, orient='index')
+    eq_ort = eq_df.sum()/len(eq_df)
+    return eq_ort
