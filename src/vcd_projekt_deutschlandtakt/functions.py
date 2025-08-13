@@ -211,18 +211,18 @@ def gewichtung(primary_idx: pd.DataFrame) -> Series | DataFrame:
 
     return primary_idx
 
-def erschliessungsqualitaet(weighted_idx: DataFrame) -> Series | DataFrame:
+def erschliessungsqualitaet(weighted_idx: DataFrame) -> dict:
     """
 
     :param weighted_idx:
     :return:
     """
     destinations = weighted_idx.index.values
-    # eqs = []
+    eq = {}
     for dest in destinations:
-        eq = weighted_idx.loc[dest].sum()
-       # eqs.append(eq)
-        print(dest, eq)
+        eq[dest] = weighted_idx.loc[dest].sum()  # weighted_idx.loc[dest].sum() is the e
+
+    return eq
     # todo: complete this function to output/display eq for every destination-departure pair
 
 # todo: write function "averaging" over every departure
