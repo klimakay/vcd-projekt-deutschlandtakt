@@ -228,7 +228,6 @@ def resultat(eq_wert: dict) -> DataFrame:
     This function converts in the end first the input dictionary to a Dataframe and then the mean over
     the whole number of destinations. This is the final result.
     :param eq_wert: input dictionary which contains the sums of weighted index over all destinations.
-    :param eq_df: converts the dictionary back into a Dataframe
     :return eq_ort: the mean over all destinations.
     """
     eq_df = pd.DataFrame.from_dict(eq_wert, orient='index')
