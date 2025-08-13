@@ -3,7 +3,8 @@
     travel time (Reisezeit), the pure travel speed with the train (Befoerderungsgeschwindigkeit), comfort (Komfort),
     and train freuency (Taktfrequenz).
 
-    Parameters concerning transits are ignored, as in this case we evaluate direct transits between two destinations.
+    data files concerning transits, espacially umsteigezeit and Anzahl Umsteigevorgänge can be taken into account,
+     if you switch schalter on True.
 """
 
 from pathlib import Path
