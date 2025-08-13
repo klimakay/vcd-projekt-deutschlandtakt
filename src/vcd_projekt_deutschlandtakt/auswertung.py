@@ -25,6 +25,6 @@ if __name__ == '__main__':
         results = calculation_grundlegend(evaluation[departure])
         weighted_idx = gewichtung(results)
         eq_verbindung = erschliessungsqualitaet(weighted_idx)
-        erschließungsindex = resultat(eq_verbindung)
+        erschliessungsindex = resultat(eq_verbindung)
         print(departure)
-        print(erschließungsindex)
+        print(erschliessungsindex)
