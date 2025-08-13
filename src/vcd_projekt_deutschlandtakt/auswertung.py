@@ -24,7 +24,7 @@ if __name__ == '__main__':
 
     for departure in departures:
         results = calculation_grundlegend(evaluation[departure], schalter = False)
-        weighted_idx = gewichtung(results)
+        weighted_idx = gewichtung(results, schalter = False)
         eq_verbindung = erschliessungsqualitaet(weighted_idx)
         erschliessungsindex = resultat(eq_verbindung)
         print(departure)
