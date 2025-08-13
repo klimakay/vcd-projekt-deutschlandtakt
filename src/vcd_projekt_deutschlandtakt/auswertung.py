@@ -27,5 +27,6 @@ if __name__ == '__main__':
         weighted_idx = gewichtung(results, schalter = False)
         eq_verbindung = erschliessungsqualitaet(weighted_idx)
         erschliessungsindex = resultat(eq_verbindung)
-        print(departure)
-        print(erschliessungsindex)
+        erreichbarkeit.loc[departure,"Erreichbarkeitsindex"] = erschliessungsindex
+
+    print(erreichbarkeit)
