@@ -231,5 +231,5 @@ def resultat(eq_wert: dict) -> DataFrame:
     :return eq_ort: the mean over all destinations.
     """
     eq_df = pd.DataFrame.from_dict(eq_wert, orient='index')
-    eq_ort = eq_df.mean()
+    eq_ort = round(eq_df.values.mean(),2)
     return eq_ort
