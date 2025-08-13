@@ -1,8 +1,6 @@
 """
     All functions are stored here that are used to read data, evaluate the general parameters (step 1), and the
-    reachability index (step 2). The variable L_SCHALTER can be used to switch on the model mode for
-    data with transfer connections. The corresponding data must be listed in the Excel table as described in the
-     code.
+    reachability index (step 2).
 """
 
 
