@@ -23,7 +23,7 @@ if __name__ == '__main__':
     erreichbarkeit = pd.DataFrame(columns = ["Erreichbarkeitsindex"], index = list(departures))
 
     for departure in departures:
-        results = calculation_grundlegend(evaluation[departure])
+        results = calculation_grundlegend(evaluation[departure], schalter = False)
         weighted_idx = gewichtung(results)
         eq_verbindung = erschliessungsqualitaet(weighted_idx)
         erschliessungsindex = resultat(eq_verbindung)
