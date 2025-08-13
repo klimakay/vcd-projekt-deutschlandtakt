@@ -213,24 +213,24 @@ def gewichtung(primary_idx: pd.DataFrame) -> Series | DataFrame:
 
 def erschliessungsqualitaet(weighted_idx: DataFrame) -> dict:
     """
+    Calculates the sum of the different weighted parameters per line, so over all destinations
 
-    :param weighted_idx:
-    :return:
+    :param weighted_idx: Contains the diffrent weighted indexes from function gewichtung.
+    :return eq: a dictionary which contains the sums of weighted index.
     """
     destinations = weighted_idx.index.values
     eq = {}
     for dest in destinations:
         eq[dest] = weighted_idx.loc[dest].sum()  # weighted_idx.loc[dest].sum() is the e
     return eq
-    # todo: complete this function to output/display eq for every destination-departure pair
-
-# todo: write function "averaging" over every departure
 
 def resultat(eq_wert: dict) -> DataFrame:
     """
-
-    :param eq_wert:
-    :return:
+    This function converts in the end first the input dictionary to a Dataframe and then the mean over
+    the whole number of destinations. This is the final result.
+    :param eq_wert: input dictionary which contains the sums of weighted index over all destinations.
+    :param eq_df: converts the dictionary back into a Dataframe
+    :return eq_ort: the mean over all destinations.
     """
     eq_df = pd.DataFrame.from_dict(eq_wert, orient='index')
     eq_ort = eq_df.sum()/len(eq_df)
