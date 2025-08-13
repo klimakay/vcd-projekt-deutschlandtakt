@@ -27,6 +27,7 @@ if __name__ == '__main__':
     departures = evaluation.keys()
     erreichbarkeit = pd.DataFrame(columns = ["Erreichbarkeitsindex"], index = list(departures))
 
+
     for departure in departures:
         results = calculation_grundlegend(evaluation[departure], schalter = False)
         weighted_idx = gewichtung(results, schalter = False)
