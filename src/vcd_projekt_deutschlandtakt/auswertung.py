@@ -23,5 +23,5 @@ if __name__ == '__main__':
 
     for destination in destinations:
         results = calculation_grundlegend(evaluation[destination])
-        fahrplan=gewichtung(results)
+        fahrplan = gewichtung(results)
         print(fahrplan)
