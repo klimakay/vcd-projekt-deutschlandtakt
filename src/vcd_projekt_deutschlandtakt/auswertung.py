@@ -33,4 +33,4 @@ if __name__ == '__main__':
         erschliessungsindex = resultat(eq_verbindung)
         erreichbarkeit.loc[departure,"Erreichbarkeitsindex"] = erschliessungsindex
 
-    print(erreichbarkeit)
+    erreichbarkeit.to_excel(output_path/output_file)
