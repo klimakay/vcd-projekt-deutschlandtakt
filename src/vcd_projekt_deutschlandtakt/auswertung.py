@@ -23,6 +23,6 @@ if __name__ == '__main__':
 
     for departure in departures:
         results = calculation_grundlegend(evaluation[departure])
-        fahrplan = gewichtung(results)
+        weighted_idx = gewichtung(results)
         print(departure)
-        print(erschliessungsqualitaet(fahrplan))
+        print(erschliessungsqualitaet(weighted_idx))
