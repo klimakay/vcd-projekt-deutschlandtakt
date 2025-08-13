@@ -20,6 +20,7 @@ if __name__ == '__main__':
     data_path = Path("../../data")
     evaluation = read_all_data(data_path / file_name)
     departures = evaluation.keys()
+    erreichbarkeit = pd.DataFrame(columns = ["Erreichbarkeitsindex"], index = list(departures))
 
     for departure in departures:
         results = calculation_grundlegend(evaluation[departure])
