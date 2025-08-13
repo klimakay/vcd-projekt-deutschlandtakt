@@ -8,7 +8,7 @@
 
 from pathlib import Path
 
-from functions import read_all_data, calculation_grundlegend, gewichtung, erschliessungsqualitaet
+from functions import read_all_data, calculation_grundlegend, gewichtung, erschliessungsqualitaet, resultat
 
 #  Testcase
 if __name__ == '__main__':
@@ -16,7 +16,7 @@ if __name__ == '__main__':
     First Evaluation only for Jahresfahrplan 2025, to check if the code works correct
     Please check the correct data_path in the end if some troubles occur when the file will be read.
     """
-    file_name = "Auswertung Fahrplan 2025.xlsx"
+    file_name = "Auswertung Fahrplan Deutschlandtakt.xlsx"
     data_path = Path("../../data")
     evaluation = read_all_data(data_path / file_name)
     departures = evaluation.keys()
@@ -24,5 +24,7 @@ if __name__ == '__main__':
     for departure in departures:
         results = calculation_grundlegend(evaluation[departure])
         weighted_idx = gewichtung(results)
+        eq_verbindung = erschliessungsqualitaet(weighted_idx)
+        erschließungsindex = resultat(eq_verbindung)
         print(departure)
-        print(erschliessungsqualitaet(weighted_idx))
+        print(erschließungsindex)
