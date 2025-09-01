@@ -24,11 +24,14 @@ def read_all_data(file_path: Path) -> dict[str, DataFrame] | None:
     """
 
     if file_path.suffix == ".xlsx":
+        # ToDo you could read this with an context manager (with statement)
+        #  to ensure resources are freed if the file does not exists
         data = pd.read_excel(file_path, sheet_name=None)
         return data
 
-    if file_path.suffix != ".xlsx":
-        raise ValueError("The input must be a .xlsx file")
+    raise ValueError("The input must be a .xlsx file")
+
+    # ToDo this None return will never be reached - so it is redundant.
     return None
 
 
@@ -37,12 +40,15 @@ def calculation_grundlegend(schedule_data: pd.DataFrame, schalter = False) -> pd
     Calulates all basic parameters for evaluation: Reisezeit (ra),
     Beförderungsgeschwindigkeit (bg), Komfort (as) and Taktfrequenz (zv).
 
+    # ToDo schalter could use a more descriptive name (consider_transits)
     :param schalter: Determines if transits are considered or not.
     :param schedule_data: The entire schedule Excel sheet.
     :return: basic_params: a pd.DataFrame including all basic parameters to be calculated.
     """
 
-
+    # ToDo the functions exists only in the scope of this function.
+    #  However, they seem quite standalone, so you could put them in outer scope to use
+    #  elsewhere
     def reisezeit(zeit_bahn: pd.DataFrame, zeit_auto: pd.DataFrame) -> pd.DataFrame:
         """
         Calculates the ratio between travel time by train and by car. Output is the ratio in percent.
@@ -96,6 +102,8 @@ def calculation_grundlegend(schedule_data: pd.DataFrame, schalter = False) -> pd
 
     data = schedule_data
     cols = data.columns
+    # ToDo I like the constant (I think it might was a comment from last it?)
+    #  but I would use it for all column to be constant
     destination = data[COL_DESTINATION]
     t_bahn = data[cols[1]]
     t_auto = data[cols[2]]
@@ -103,6 +111,8 @@ def calculation_grundlegend(schedule_data: pd.DataFrame, schalter = False) -> pd
     s_auto = data[cols[4]]
     taktfrequenz = data[cols[5]]
 
+    # ToDO the functions you be defined anyway. There is no overhead, as both cases are
+    #  loaded/check anyway before runtime and are only executed on runtime
     if schalter:
 
         def umsteigezwang(strecke_bahn: pd.DataFrame, anzahl_umsteigevorgang:pd.DataFrame) -> pd.DataFrame:
@@ -136,6 +146,8 @@ def calculation_grundlegend(schedule_data: pd.DataFrame, schalter = False) -> pd
         ua = umsteigezeit_ratio(zeit_bahn=t_bahn, umsteigezeit=t_u)
         uv = umsteigezwang(strecke_bahn=s_bahn, anzahl_umsteigevorgang=u)
 
+        # ToDo you  have some code duplication below. Why dont create the dict with the
+        #  base case and update it is the condition is given?
         basic_params = pd.DataFrame({"Ziel": destination,
                                      "Reisezeit Verhältnis": ra,
                                      "Beförderungsgeschwindigkeit": bg,
@@ -167,6 +179,7 @@ def gewichtung(primary_idx: pd.DataFrame, schalter = False) -> Series | DataFram
     :return primary_idx: A new pd.Series or pd.DataFame based on the input DataFrame that consists of the weighted
     index for time-dependent and distance-independent input variables.
     """
+    # ToDo analog comments to function above
     primary_idx.set_index("Ziel", drop=True, inplace=True)
     parameters = primary_idx.columns[:]
     for col in parameters:
@@ -214,15 +227,17 @@ def erschliessungsqualitaet(weighted_idx: DataFrame) -> dict:
     """
     Calculates the sum of the different weighted parameters per line, so over all destinations
 
-    :param weighted_idx: Contains the diffrent weighted indexes from function gewichtung.
+    :param weighted_idx: Contains the different weighted indexes from function gewichtung.
     :return eq: a dictionary which contains the sums of weighted index.
     """
     destinations = weighted_idx.index.values
     eq = {}
     for dest in destinations:
+        # ToDO what is this comment about?
         eq[dest] = weighted_idx.loc[dest].sum()  # weighted_idx.loc[dest].sum() is the e
     return eq
 
+# ToDo what about formatting as the function name?
 def resultat(eq_wert: dict) -> float:
     """
     This function converts in the end first the input dictionary to a Dataframe and then the mean over
