@@ -61,7 +61,7 @@ def befoerderungsgeschwindigkeit(strecke_bahn: pd.DataFrame, zeit_bahn: pd.DataF
     :param transit: Checks if transits are considered or not.
     :return: travel speed in km/h
     """
-    if not schalter:
+    if not transit:
         umsteigezeit = 0
 
     return round(strecke_bahn / (zeit_bahn - umsteigezeit), 2)
