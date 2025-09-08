@@ -50,7 +50,7 @@ def reisezeit(zeit_bahn: pd.DataFrame, zeit_auto: pd.DataFrame) -> pd.DataFrame:
 
 
 def befoerderungsgeschwindigkeit(strecke_bahn: pd.DataFrame, zeit_bahn: pd.DataFrame,
-                                 umsteigezeit: pd.DataFrame = None, transit: bool = False) -> pd.DataFrame:
+                                 umsteigezeit: pd.DataFrame = None, consider_transit: bool = False) -> pd.DataFrame:
     """
     Calculate the pure travel speed with the distance traveled and the pure travel time with the train.
 
@@ -58,10 +58,10 @@ def befoerderungsgeschwindigkeit(strecke_bahn: pd.DataFrame, zeit_bahn: pd.DataF
     :param zeit_bahn: Time traveled by train in min.
     :param umsteigezeit: Time for transit in minute. Note that it is 0 by default, for cases when no transits are
     necessary.
-    :param transit: Checks if transits are considered or not.
+    :param consider_transit: Checks if transits are considered or not.
     :return: travel speed in km/h
     """
-    if not transit:
+    if not consider_transit:
         umsteigezeit = 0
 
     return round(strecke_bahn / (zeit_bahn - umsteigezeit), 2)
