@@ -141,12 +141,8 @@ def calculation_grundlegend(schedule_data: pd.DataFrame, schalter = False) -> pd
                                  "Taktfrequenz": zv})
 
     if schalter:
-        t_u = data[cols[6]]
-        u = data[cols[7]]
-        ra = reisezeit(zeit_bahn=t_bahn, zeit_auto=t_auto)
-        bg = befoerderungsgeschwindigkeit(strecke_bahn=s_bahn, zeit_bahn=t_bahn, umsteigezeit=t_u)
-        ks = komfort(strecke_bahn=s_bahn, strecke_auto=s_auto)
-        zv = takt(taktfrequenz)
+        t_u = schedule_data[cols[6]]
+        u = schedule_data[cols[7]]
         ua = umsteigezeit_ratio(zeit_bahn=t_bahn, umsteigezeit=t_u)
         uv = umsteigezwang(strecke_bahn=s_bahn, anzahl_umsteigevorgang=u)
 
