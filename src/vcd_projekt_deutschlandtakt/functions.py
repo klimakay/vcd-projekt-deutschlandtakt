@@ -131,29 +131,6 @@ def calculation_grundlegend(schedule_data: pd.DataFrame, schalter = False) -> pd
     taktfrequenz = data[cols[5]]
 
     if schalter:
-
-        def umsteigezwang(strecke_bahn: pd.DataFrame, anzahl_umsteigevorgang:pd.DataFrame) -> pd.DataFrame:
-            """
-            Calculates the ratio of transits along distance traveled by train.
-
-            :param strecke_bahn: Distance traveled by train in km.
-            :param anzahl_umsteigevorgang: Number of transits.
-            :return: Umsteigezwang (%/km)
-            """
-
-            return round(anzahl_umsteigevorgang * 100 / strecke_bahn, 2)
-
-        def umsteigezeit_ratio(zeit_bahn: pd.DataFrame, umsteigezeit: pd.DataFrame) -> pd.DataFrame:
-            """
-            Calculates the ratio of zeit between transits and the actual travel time.
-
-            :param zeit_bahn: Time traveled by train in min.
-            :param umsteigezeit: Time for transit in minute.
-            :return: Umsteigezeit (min).
-            """
-
-            return round(umsteigezeit / zeit_bahn * 100, 2)
-
         t_u = data[cols[6]]
         u = data[cols[7]]
         ra = reisezeit(zeit_bahn=t_bahn, zeit_auto=t_auto)
