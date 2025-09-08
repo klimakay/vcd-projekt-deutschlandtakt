@@ -58,6 +58,7 @@ def befoerderungsgeschwindigkeit(strecke_bahn: pd.DataFrame, zeit_bahn: pd.DataF
     :param zeit_bahn: Time traveled by train in min.
     :param umsteigezeit: Time for transit in minute. Note that it is 0 by default, for cases when no transits are
     necessary.
+    :param transit: Checks if transits are considered or not.
     :return: travel speed in km/h
     """
     if not schalter:
