@@ -24,8 +24,10 @@ def read_all_data(file_path: Path) -> dict[str, DataFrame]:
     """
 
     if file_path.suffix != ".xlsx":
-        raise ValueError("The input must be a .xlsx file")
-    return None
+        raise ValueError("The input must be a .xlsx file.")
+
+    if not file_path.exists():
+        raise FileNotFoundError(f"No such file: {file_path}")
 
 
 def calculation_grundlegend(schedule_data: pd.DataFrame, schalter = False) -> pd.DataFrame:
