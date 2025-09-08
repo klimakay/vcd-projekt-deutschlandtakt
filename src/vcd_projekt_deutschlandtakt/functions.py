@@ -214,7 +214,7 @@ def erschliessungsqualitaet(weighted_idx: DataFrame) -> dict:
     destinations = weighted_idx.index.values
     eq = {}
     for dest in destinations:
-        eq[dest] = weighted_idx.loc[dest].sum()  # weighted_idx.loc[dest].sum() is the e
+        eq[dest] = weighted_idx.loc[dest].sum()  
     return eq
 
 def resultat(eq_wert: dict) -> float:
