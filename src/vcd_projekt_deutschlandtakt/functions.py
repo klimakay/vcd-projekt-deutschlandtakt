@@ -146,24 +146,8 @@ def calculation_grundlegend(schedule_data: pd.DataFrame, schalter = False) -> pd
         ua = umsteigezeit_ratio(zeit_bahn=t_bahn, umsteigezeit=t_u)
         uv = umsteigezwang(strecke_bahn=s_bahn, anzahl_umsteigevorgang=u)
 
-        basic_params = pd.DataFrame({"Ziel": destination,
-                                     "Reisezeit Verhältnis": ra,
-                                     "Beförderungsgeschwindigkeit": bg,
-                                     "Komfort": ks,
-                                     "Taktfrequenz": zv,
-                                     "Umsteigezeitverhältnis": ua,
-                                     "Umsteigezwang": uv})
-
-    else:
-        ra = reisezeit(zeit_bahn=t_bahn, zeit_auto=t_auto)
-        bg = befoerderungsgeschwindigkeit(strecke_bahn=s_bahn, zeit_bahn=t_bahn)
-        ks = komfort(strecke_bahn=s_bahn, strecke_auto=s_auto)
-        zv = takt(taktfrequenz)
-        basic_params = pd.DataFrame({"Ziel": destination,
-                                     "Reisezeit Verhältnis": ra,
-                                     "Beförderungsgeschwindigkeit": bg,
-                                     "Komfort": ks,
-                                     "Taktfrequenz": zv})
+        basic_params["Umsteigezeitverhältnis"] = ua,
+        basic_params["Umsteigezwang"] = uv
 
     return basic_params
 
