@@ -50,7 +50,7 @@ def reisezeit(zeit_bahn: pd.DataFrame, zeit_auto: pd.DataFrame) -> pd.DataFrame:
 
 
 def befoerderungsgeschwindigkeit(strecke_bahn: pd.DataFrame, zeit_bahn: pd.DataFrame,
-                                 umsteigezeit: pd.DataFrame | float | None=None) -> pd.DataFrame:
+                                 umsteigezeit: pd.DataFrame = None, transit: bool = False) -> pd.DataFrame:
     """
     Calculate the pure travel speed with the distance traveled and the pure travel time with the train.
 
