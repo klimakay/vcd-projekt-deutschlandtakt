@@ -191,22 +191,7 @@ def gewichtung(primary_idx: pd.DataFrame, consider_transit = False) -> DataFrame
         else:
             primary_idx[col] = ratio * 100  # for percentage
 
-            primary_idx[col] = primary_idx[col] * d[col]
-
-        else:
-            # Gewichtungsfaktoren
-            d = {"Komfort": 0.294,
-                 "Reisezeit Verhältnis": 0.460,
-                 "Beförderungsgeschwindigkeit": 0.159,
-                 "Taktfrequenz": 0.087,
-                 }
-
-            if col == "Reisezeit Vehältnis":
-                primary_idx[col] = (2 - ratio) * 100
-            else:
-                primary_idx[col] = ratio * 100
-
-            primary_idx[col] = primary_idx[col] * d[col]
+        primary_idx[col] = primary_idx[col] * weights[col]
 
     return primary_idx
 
