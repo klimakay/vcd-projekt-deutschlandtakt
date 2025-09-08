@@ -17,10 +17,10 @@ def read_all_data(file_path: Path) -> dict[str, DataFrame]:
     Reads the input of a .xlsx file containing the evaluation of each connection. Outputs the entire .xlsx file,
     as well as the name of each sheet, which indicates the departure station.
 
-
-    :param file_path: path and name of the .xlsx evaluation file
-    :return: Entire Excel sheet (data) in file_path
-    :raise: ValueError if file_path is not a .xlsx file.
+    :param file_path: Path and name of the .xlsx evaluation file.
+    :return: Dictionary of DataFrames (all sheets in the Excel file).
+    :raise FileNotFoundError: If the file does not exist.
+    :raise ValueError: If the Excel file is not a .xlsx file or cannot be parsed.
     """
 
     if file_path.suffix != ".xlsx":
