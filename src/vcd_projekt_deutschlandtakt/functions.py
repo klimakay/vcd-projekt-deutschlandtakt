@@ -23,10 +23,6 @@ def read_all_data(file_path: Path) -> dict[str, DataFrame]:
     :raise: ValueError if file_path is not a .xlsx file.
     """
 
-    if file_path.suffix == ".xlsx":
-        data = pd.read_excel(file_path, sheet_name=None)
-        return data
-
     if file_path.suffix != ".xlsx":
         raise ValueError("The input must be a .xlsx file")
     return None
