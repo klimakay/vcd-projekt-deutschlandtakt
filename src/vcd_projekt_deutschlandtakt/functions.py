@@ -12,7 +12,7 @@ from pandas import DataFrame, Series
 COL_DESTINATION = 'Verbindung nach'
 
 
-def read_all_data(file_path: Path) -> dict[str, DataFrame] | None:
+def read_all_data(file_path: Path) -> dict[str, DataFrame]:
     """
     Reads the input of a .xlsx file containing the evaluation of each connection. Outputs the entire .xlsx file,
     as well as the name of each sheet, which indicates the departure station.
