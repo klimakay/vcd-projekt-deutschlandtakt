@@ -155,7 +155,7 @@ def calculation_grundlegend(schedule_data: pd.DataFrame, schalter = False) -> pd
 def gewichtung(primary_idx: pd.DataFrame, consider_transit = False) -> DataFrame:
     """
     Calculates a weighted index for time-dependent and distance-independent input variables.
-    :param consider_transit: A bool that dDetermines if transits are considered or not.
+    :param consider_transit: A bool that determines if transits are considered or not.
     :param primary_idx: Dataframe that consists of the primary parameters for different origins to a certain
     destination.
     :return primary_idx: A new pd.Series or pd.DataFame based on the input DataFrame that consists of the weighted
@@ -208,13 +208,13 @@ def erschliessungsqualitaet(weighted_idx: DataFrame) -> dict:
     """
     Calculates the sum of the different weighted parameters per line, so over all destinations
 
-    :param weighted_idx: Contains the diffrent weighted indexes from function gewichtung.
+    :param weighted_idx: Contains the different weighted indexes from function gewichtung.
     :return eq: a dictionary which contains the sums of weighted index.
     """
     destinations = weighted_idx.index.values
     eq = {}
     for dest in destinations:
-        eq[dest] = weighted_idx.loc[dest].sum()  
+        eq[dest] = weighted_idx.loc[dest].sum()
     return eq
 
 def resultat(eq_wert: dict) -> float:
