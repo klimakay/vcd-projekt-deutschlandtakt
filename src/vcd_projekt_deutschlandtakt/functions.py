@@ -130,6 +130,17 @@ def calculation_grundlegend(schedule_data: pd.DataFrame, schalter = False) -> pd
     s_auto = data[cols[4]]
     taktfrequenz = data[cols[5]]
 
+    ra = reisezeit(zeit_bahn=t_bahn, zeit_auto=t_auto)
+    bg = befoerderungsgeschwindigkeit(strecke_bahn=s_bahn, zeit_bahn=t_bahn)
+    ks = komfort(strecke_bahn=s_bahn, strecke_auto=s_auto)
+    zv = takt(taktfrequenz)
+
+    basic_params = pd.DataFrame({"Ziel": destination,
+                                 "Reisezeit Verhältnis": ra,
+                                 "Beförderungsgeschwindigkeit": bg,
+                                 "Komfort": ks,
+                                 "Taktfrequenz": zv})
+
     if schalter:
         t_u = data[cols[6]]
         u = data[cols[7]]
