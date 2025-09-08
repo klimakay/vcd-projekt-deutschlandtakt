@@ -30,7 +30,7 @@ if __name__ == '__main__':
 
     for departure in departures:
         results = calculation_grundlegend(evaluation[departure], schalter = False)
-        weighted_idx = gewichtung(results, schalter = False)
+        weighted_idx = gewichtung(results, consider_transit = False)
         eq_verbindung = erschliessungsqualitaet(weighted_idx)
         erschliessungsindex = format_results(eq_verbindung)
         erreichbarkeit.loc[departure,"Erreichbarkeitsindex"] = erschliessungsindex
