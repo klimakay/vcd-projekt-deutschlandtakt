@@ -121,14 +121,13 @@ def calculation_grundlegend(schedule_data: pd.DataFrame, schalter = False) -> pd
     :return: basic_params: a pd.DataFrame including all basic parameters to be calculated.
     """
 
-    data = schedule_data
-    cols = data.columns
-    destination = data[COL_DESTINATION]
-    t_bahn = data[cols[1]]
-    t_auto = data[cols[2]]
-    s_bahn = data[cols[3]]
-    s_auto = data[cols[4]]
-    taktfrequenz = data[cols[5]]
+    cols = schedule_data.columns
+    destination = schedule_data[COL_DESTINATION]
+    t_bahn = schedule_data[cols[1]]
+    t_auto = schedule_data[cols[2]]
+    s_bahn = schedule_data[cols[3]]
+    s_auto = schedule_data[cols[4]]
+    taktfrequenz = schedule_data[cols[5]]
 
     ra = reisezeit(zeit_bahn=t_bahn, zeit_auto=t_auto)
     bg = befoerderungsgeschwindigkeit(strecke_bahn=s_bahn, zeit_bahn=t_bahn)
