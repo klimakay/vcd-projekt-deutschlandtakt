@@ -29,6 +29,13 @@ def read_all_data(file_path: Path) -> dict[str, DataFrame]:
     if not file_path.exists():
         raise FileNotFoundError(f"No such file: {file_path}")
 
+    try:
+        with file_path.open("rb") as f:
+            data = pd.read_excel(f, sheet_name=None)
+    except Exception as e:
+        raise ValueError(f"Failed to parse Excel file '{file_path}': {e}") from e
+
+    return data
 
 def calculation_grundlegend(schedule_data: pd.DataFrame, schalter = False) -> pd.DataFrame:
     """
