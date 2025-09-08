@@ -37,6 +37,56 @@ def read_all_data(file_path: Path) -> dict[str, DataFrame]:
 
     return data
 
+def reisezeit(zeit_bahn: pd.DataFrame, zeit_auto: pd.DataFrame) -> pd.DataFrame:
+    """
+    Calculates the ratio between travel time by train and by car. Output is the ratio in percent.
+
+    :param zeit_bahn: The time it takes to reach the destination by train in min.
+    :param zeit_auto: The time it takes to reach the destination by car in min.
+    :return: Reisezeit (ra) in %
+    """
+
+    return round(zeit_auto/zeit_bahn, 2)
+
+
+def befoerderungsgeschwindigkeit(strecke_bahn: pd.DataFrame, zeit_bahn: pd.DataFrame,
+                                 umsteigezeit: pd.DataFrame | float | None=None) -> pd.DataFrame:
+    """
+    Calculate the pure travel speed with the distance traveled and the pure travel time with the train.
+
+    :param strecke_bahn: Distance traveled by train in km.
+    :param zeit_bahn: Time traveled by train in min.
+    :param umsteigezeit: Time for transit in minute. Note that it is 0 by default, for cases when no transits are
+    necessary.
+    :return: travel speed in km/h
+    """
+    if not schalter:
+        umsteigezeit = 0
+
+    return round(strecke_bahn / (zeit_bahn - umsteigezeit), 2)
+
+
+def komfort(strecke_bahn: pd.DataFrame, strecke_auto: pd.DataFrame) -> pd.DataFrame:
+    """
+    Calculates the comfort index by dividing the distance traveled by train in km with the distance traveled
+    by car in km.
+
+    :param strecke_bahn: Distance traveled by train in km.
+    :param strecke_auto: Distance traveled by car in km.
+    :return: Komfort (%)
+    """
+
+    return round(strecke_bahn / strecke_auto, 2)
+
+
+def takt(frequenz: pd.DataFrame) -> pd.DataFrame:
+    """
+    Gives back the number of trains per hour (taktfrequenz)
+    :param frequenz: number of trains/hour
+    :return: taktfrequenz (number of trains/hour)
+    """
+    return round(frequenz,2)
+
 def calculation_grundlegend(schedule_data: pd.DataFrame, schalter = False) -> pd.DataFrame:
     """
     Calulates all basic parameters for evaluation: Reisezeit (ra),
