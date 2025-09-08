@@ -155,7 +155,7 @@ def calculation_grundlegend(schedule_data: pd.DataFrame, schalter = False) -> pd
 def gewichtung(primary_idx: pd.DataFrame, consider_transit = False) -> DataFrame:
     """
     Calculates a weighted index for time-dependent and distance-independent input variables.
-    :param schalter: A bool that dDetermines if transits are considered or not.
+    :param consider_transit: A bool that dDetermines if transits are considered or not.
     :param primary_idx: Dataframe that consists of the primary parameters for different origins to a certain
     destination.
     :return primary_idx: A new pd.Series or pd.DataFame based on the input DataFrame that consists of the weighted
