@@ -163,6 +163,26 @@ def gewichtung(primary_idx: pd.DataFrame, consider_transit = False) -> DataFrame
     """
     primary_idx.set_index("Ziel", drop=True, inplace=True)
     parameters = primary_idx.columns[:]
+
+    # Gewichtungsfaktoren
+    weights = (
+        {
+            "Komfort": 0.242,
+            "Reisezeit Verhältnis": 0.379,
+            "Beförderungsgeschwindigkeit": 0.131,
+            "Taktfrequenz": 0.072,
+            "Umsteigezeitverhältnis": 0.088,
+            "Umsteigezwang": 0.088,
+        }
+        if consider_transit
+        else {
+            "Komfort": 0.294,
+            "Reisezeit Verhältnis": 0.460,
+            "Beförderungsgeschwindigkeit": 0.159,
+            "Taktfrequenz": 0.087,
+        }
+    )
+
     for col in parameters:
         ratio = primary_idx[col]/primary_idx[col].mean()
 
