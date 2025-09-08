@@ -47,7 +47,6 @@ def calculation_grundlegend(schedule_data: pd.DataFrame, schalter = False) -> pd
     :return: basic_params: a pd.DataFrame including all basic parameters to be calculated.
     """
 
-
     def reisezeit(zeit_bahn: pd.DataFrame, zeit_auto: pd.DataFrame) -> pd.DataFrame:
         """
         Calculates the ratio between travel time by train and by car. Output is the ratio in percent.
