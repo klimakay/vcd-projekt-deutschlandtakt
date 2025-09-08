@@ -208,7 +208,7 @@ def erschliessungsqualitaet(weighted_idx: DataFrame) -> dict:
         eq[dest] = weighted_idx.loc[dest].sum()
     return eq
 
-def resultat(eq_wert: dict) -> float:
+def format_results(eq_wert: dict) -> float:
     """
     This function converts in the end first the input dictionary to a Dataframe and then the mean over
     the whole number of destinations. This is the final result.
