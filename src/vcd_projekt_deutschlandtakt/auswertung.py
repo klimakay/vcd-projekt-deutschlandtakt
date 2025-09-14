@@ -11,7 +11,7 @@ from pathlib import Path
 
 import pandas as pd
 
-from functions import read_all_data, calculation_grundlegend, gewichtung, erschliessungsqualitaet, resultat
+from functions import read_all_data, calculation_grundlegend, gewichtung, erschliessungsqualitaet, format_results
 
 #  Testcase
 if __name__ == '__main__':
@@ -29,10 +29,10 @@ if __name__ == '__main__':
 
 
     for departure in departures:
-        results = calculation_grundlegend(evaluation[departure], schalter = False)
-        weighted_idx = gewichtung(results, schalter = False)
+        results = calculation_grundlegend(evaluation[departure], consider_transit = False)
+        weighted_idx = gewichtung(results, consider_transit = False)
         eq_verbindung = erschliessungsqualitaet(weighted_idx)
-        erschliessungsindex = resultat(eq_verbindung)
+        erschliessungsindex = format_results(eq_verbindung)
         erreichbarkeit.loc[departure,"Erreichbarkeitsindex"] = erschliessungsindex
 
     erreichbarkeit.to_excel(output_path/output_file)
