@@ -111,12 +111,12 @@ def umsteigezeit_ratio(zeit_bahn: pd.DataFrame, umsteigezeit: pd.DataFrame) -> p
 
     return round(umsteigezeit / zeit_bahn * 100, 2)
 
-def calculation_grundlegend(schedule_data: pd.DataFrame, schalter = False) -> pd.DataFrame:
+def calculation_grundlegend(schedule_data: pd.DataFrame, consider_transit = False) -> pd.DataFrame:
     """
     Calulates all basic parameters for evaluation: Reisezeit (ra),
     Beförderungsgeschwindigkeit (bg), Komfort (as) and Taktfrequenz (zv).
 
-    :param schalter: Determines if transits are considered or not.
+    :param consider_transit: Determines if transits are considered or not.
     :param schedule_data: The entire schedule Excel sheet.
     :return: basic_params: a pd.DataFrame including all basic parameters to be calculated.
     """
@@ -140,7 +140,7 @@ def calculation_grundlegend(schedule_data: pd.DataFrame, schalter = False) -> pd
                                  "Komfort": ks,
                                  "Taktfrequenz": zv})
 
-    if schalter:
+    if consider_transit:
         t_u = schedule_data[cols[6]]
         u = schedule_data[cols[7]]
         ua = umsteigezeit_ratio(zeit_bahn=t_bahn, umsteigezeit=t_u)
